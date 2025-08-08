@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Wizard Money Gang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px #ff6b35;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .wizard-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .wizard-figure {
+            width: 120px;
+            height: 200px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .wizard-figure:nth-child(2) { animation-delay: -1s; }
+        .wizard-figure:nth-child(3) { animation-delay: -2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .wizard-hood {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(135deg, #2c2c54, #1a1a2e);
+            border-radius: 50% 50% 20% 20%;
+            margin: 0 auto 10px;
+            position: relative;
+            border: 2px solid #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .wizard-eyes {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 8px;
+            background: #00ffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ffff;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 15px #00ffff; }
+            to { box-shadow: 0 0 25px #00ffff, 0 0 35px #00ffff; }
+        }
+
+        .wizard-robe {
+            width: 100px;
+            height: 90px;
+            background: linear-gradient(135deg, #40407a, #2c2c54);
+            border-radius: 0 0 50px 50px;
+            margin: 0 auto;
+            border: 2px solid rgba(255, 107, 53, 0.5);
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px #ff6b35;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 0 0 20px #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .nft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .nft-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nft-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .nft-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phase-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 60px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .phase-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ff6b35;
+            text-shadow: 0 0 15px #ff6b35;
+        }
+
+        .phase-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .phase-icon {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #2c2c54, #1a1a2e);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #ff6b35;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            flex-shrink: 0;
+        }
+
+        .lock-icon {
+            width: 80px;
+            height: 100px;
+            background: #7f8c8d;
+            border-radius: 15px 15px 5px 5px;
+            position: relative;
+            border: 3px solid #34495e;
+        }
+
+        .lock-icon::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border: 8px solid #34495e;
+            border-radius: 50%;
+            border-bottom: none;
+        }
+
+        .chain {
+            position: absolute;
+            width: 120px;
+            height: 8px;
+            background: #34495e;
+            border-radius: 4px;
+            top: 50%;
+            left: -60px;
+            transform: translateY(-50%);
+        }
+
+        .chain::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 0;
+            width: 60px;
+            height: 8px;
+            background: #34495e;
+            border-radius: 4px;
+        }
+
+        .phase-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .phase-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .floating-wizard {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 80px;
+            height: 120px;
+            z-index: 1000;
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 1.8rem; }
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 1rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-content { padding: 40px 20px; }
+            .section-title { font-size: 2rem; }
+            .phase-container { padding: 40px 20px; }
+            .phase-content { flex-direction: column; text-align: center; }
+            .wizard-container { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">SHADOW WIZARD MONEY GANG</div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#nfts">NFTS</a></li>
+                <li><a href="#roadmap">ROADMAP</a></li>
+                <li><a href="#gamble">GAMBLE</a></li>
+                <li><a href="#terminal">TERMINAL</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="wizard-container">
+                        <div class="wizard-figure">
+                            <div class="wizard-hood">
+                                <div class="wizard-eyes"></div>
+                            </div>
+                            <div class="wizard-robe"></div>
+                        </div>
+                        
+                        <div class="hero-text">
+                            <h1>SHADOW WIZARD MONEY GANG</h1>
+                            <p>THE SHADOW WIZARD MONEY GANG HAS BEEN WORKING IN THE SHADOWS FOR CENTURIES, RULING THE WORLD. THEY ARE RESPONSIBLE FOR EVERY MAJOR EVENT THAT YOU HAVE EVER HEARD OF.</p>
+                            
+                            <p>YOU'VE HEARD OF PEOPLE BEING IN THE "1% CLUB" WELL THE SHADOW WIZARDS ARE THE TOP 1% OF THE 1% CLUB.</p>
+                            
+                            <p>NOW THEY'VE RISEN FROM THE SHADOWS AND ARE ACCEPTING NEW MEMBERS, BUILDING A STRONGER MORE POWERFUL ARMY OF WIZARDS ON THE SOLANA BLOCKCHAIN.</p>
+                            
+                            <p>IT'S GOING TO HAPPEN IN THREE PHASES, AND THEY WILL BE ANNOUNCED WHEN THE TIME IS RIGHT.</p>
+                        </div>
+
+                        <div class="wizard-figure">
+                            <div class="wizard-hood">
+                                <div class="wizard-eyes"></div>
+                            </div>
+                            <div class="wizard-robe"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nfts" class="section">
+            <div class="container">
+                <h2 class="section-title">NFTS</h2>
+                <div class="nft-grid">
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #f39c12, #d35400);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #8e44ad, #7f1fa7);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #27ae60, #16a085);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #e74c3c, #a93226);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #3498db, #2980b9);">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #3498db, #1f618d);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nft-card">
+                        <div class="nft-image">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #1a1a2e, #000000);">
+                                    <div class="wizard-eyes" style="background: #ff0000; box-shadow: 0 0 15px #ff0000;"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #1a1a2e, #000000);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2 class="section-title">Roadmap</h2>
+                
+                <div class="phase-container">
+                    <h3 class="phase-title">PHASE ONE</h3>
+                    <div class="phase-content">
+                        <div class="phase-text">
+                            <p><strong>RECRUITMENT HAS BEGUN. THE SWMG TOKEN GOES LIVE. SWMG NFTS ARE NOW AVAILABLE TO BE MINTED.</strong></p>
+                            
+                            <p>THE WORLD STARTS TO BECOME AWARE OF THE IMMENSE POWER THAT THE SHADOW WIZARD MONEY GANG TRULY HAS AT THEIR DISPOSAL.</p>
+                            
+                            <p>THE GENEROSITY OF THE WIZARDS HAS ALSO BECOME KNOWN, GIVING THE NEW WIZARDS WHO HOLD SWMG NFTS A CUT OF THE REVENUE SHARE FROM THE TOKEN SALES.</p>
+                            
+                            <p>BUY BACKS OF THE SWMG TOKEN BEGIN, REVENUE GAINED FROM NFT SALES AND SWMG REVENUE SHARE ARE CAUSING SUPPLY SHOCK ON THE MARKET. CONSTANT BUYS THAT LEAD TO SUPPLY BEING BURNT AND DEMAND TO GROW.</p>
+                            
+                            <p>REAL WORLD ITEMS WILL SOON BE REVEALED, ANOTHER REVENUE STREAM FOR GREAT BUY BACKS AND MASS ADOPTION. (3D PRINTED POP VINYL LORE FIGURE + PLUSHIES OF YOUR NFTS(INSIDE THE BACKGROUND))</p>
+                            
+                            <a href="#" class="cta-button">Join Phase One</a>
+                        </div>
+                        <div class="phase-icon">
+                            <div class="wizard-figure">
+                                <div class="wizard-hood" style="background: linear-gradient(135deg, #f39c12, #e67e22); border-color: #f39c12;">
+                                    <div class="wizard-eyes"></div>
+                                </div>
+                                <div class="wizard-robe" style="background: linear-gradient(135deg, #f39c12, #d35400);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-container">
+                    <h3 class="phase-title">PHASE TWO</h3>
+                    <div class="phase-content">
+                        <div class="phase-text">
+                            <p><strong>TO BE ANNOUNCED WHEN THE TIME IS RIGHT.</strong></p>
+                            
+                            <p>ONE THING THE WIZARDS CAN SHARE WITH YOU THOUGH IS YOU WILL BENEFIT GREATLY BY HOLDING TWO OR MORE NFTS.</p>
+                            
+                            <a href="#" class="cta-button" style="background: linear-gradient(45deg, #7f8c8d, #95a5a6);">Coming Soon</a>
+                        </div>
+                        <div class="phase-icon">
+                            <div class="lock-icon">
+                                <div class="chain"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="phase-container">
+                    <h3 class="phase-title">PHASE THREE</h3>
+                    <div class="phase-content">
+                        <div class="phase-text">
+                            <p><strong>SAME AS THE ABOVE OBVIOUSLY</strong></p>
+                            
+                            <a href="#" class="cta-button" style="background: linear-gradient(45deg, #7f8c8d, #95a5a6);">Coming Soon</a>
+                        </div>
+                        <div class="phase-icon">
+                            <div class="lock-icon">
+                                <div class="chain"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gamble" class="section" style="background: rgba(0, 0, 0, 0.3);">
+            <div class="container">
+                <h2 class="section-title">GAMBLE</h2>
+                <div class="hero-content">
+                    <p style="font-size: 1.5rem; text-align: center; margin-bottom: 30px;">THE SHADOW WIZARDS HAVE MASTERED THE ART OF CALCULATED RISKS</p>
+                    <p style="text-align: center;">Coming soon - Enter the wizard's gambling den where fortunes are made and lost in the shadows...</p>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="#" class="cta-button">Enter The Den</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="terminal" class="section">
+            <div class="container">
+                <h2 class="section-title">TERMINAL</h2>
+                <div class="hero-content" style="background: rgba(0, 0, 0, 0.9); font-family: 'Courier New', monospace;">
+                    <div style="color: #00ff00; text-align: left;">
+                        <p>$ shadow_wizard_money_gang --status</p>
+                        <p style="color: #ffff00;">SYSTEM STATUS: OPERATIONAL</p>
+                        <p style="color: #ffff00;">WIZARDS ONLINE: ████████████</p>
+                        <p style="color: #ffff00;">SHADOW NETWORK: CONNECTED</p>
+                        <p style="margin-top: 20px;">$ access_granted --level: INITIATE</p>
+                        <p style="color: #ff6b35;">Welcome to the Shadow Network...</p>
+                        <p style="color: #ff6b35;">Your journey into the shadows begins now.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Shadow Wizard Money Gang. All rights reserved. Operating from the shadows since time immemorial.</p>
+        </div>
+    </footer>
+
+    <div class="floating-wizard">
+        <div class="wizard-hood">
+            <div class="wizard-eyes"></div>
+        </div>
+        <div class="wizard-robe"></div>
+    </div>
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Add click effect to floating wizard
+            const floatingWizard = document.querySelector('.floating-wizard');
+            floatingWizard.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2) rotate(360deg)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 500);
+            });
+
+            // Add hover effects to NFT cards
+            const nftCards = document.querySelectorAll('.nft-card');
+            nftCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const wizardEyes = this.querySelector('.wizard-eyes');
+                    if (wizardEyes) {
+                        wizardEyes.style.background = '#ff6b35';
+                        wizardEyes.style.boxShadow = '0 0 25px #ff6b35';
+                    }
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    const wizardEyes = this.querySelector('.wizard-eyes');
+                    if (wizardEyes) {
+                        wizardEyes.style.background = '#00ffff';
+                        wizardEyes.style.boxShadow = '0 0 15px #00ffff';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
